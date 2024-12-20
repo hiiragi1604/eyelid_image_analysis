@@ -76,6 +76,27 @@ def calculate_white_stripes(image, threshold_level=None):
         print(Fore.RED + "No black outline was detected in the image.")
         return 0, total_pixels
 
+def save_results(file_name, white_pixel_count, total_pixels):
+    # Ensure the 'result' directory exists
+    os.makedirs("./result", exist_ok=True)
+
+    # Path to the results CSV file
+    results_path = "./result/results.csv"
+
+    # Check if the CSV file exists, and if not, create it with the header
+    file_exists = os.path.exists(results_path)
+    with open(results_path, mode="a", newline='') as file:
+        writer = csv.writer(file)
+        
+        # Write header only if the file is new (does not exist)
+        if not file_exists:
+            writer.writerow(["File Name", "White Pixel Count", "Total Pixels"])
+
+        # Write the results for the current file
+        writer.writerow([file_name, white_pixel_count, total_pixels])
+
+    print(Fore.GREEN + f"Results for {file_name}.jpg have been saved to results.csv")
+
 def program():
     fileName = None
     while True:
@@ -108,10 +129,7 @@ def program():
         print(Fore.CYAN + "Are you satisfied with the results? (y/n)")
         user_satisfied = input(Fore.CYAN).lower()
         if user_satisfied == "y":
-            with open(f"./result/results.csv", "a", newline='') as file:
-                writer = csv.writer(file)
-                writer.writerow([fileName, white_pixel_count, total_pixels])
-            print(Fore.GREEN + f"Results for {fileName}.jpg have been saved to results.csv")
+            save_results(fileName, white_pixel_count, total_pixels)
             fileName = None  # Reset to allow input for a new file
             os.system('cls' if os.name == 'nt' else 'clear')
         else:
