@@ -42,13 +42,13 @@ project_root/
 ```
 
 
-## Using the Script
+## Using the Analysis Script
 
-1. Place your JPG images in the `data` folder
+1. Place your JPG images in the `data/analysis` folder
 
 2. Run the script:
     ```bash
-    python main.py
+    python analysis.py
     ```
 
 3. Program Flow:
@@ -63,13 +63,13 @@ project_root/
      - Y: Results saved to results.csv
      - N: Retry with different parameters
 
-## Output
+### Output
 The script saves results to `result/results.csv` with the following columns:
 - Filename
 - Number of pixels representing the white stripes
 - Total pixels
 
-## Tips
+### Tips
 - Ensure images have clear black outlines around the eyelids
 - Start with automatic threshold mode
 - If results aren't satisfactory, try manual mode:
@@ -77,7 +77,29 @@ The script saves results to `result/results.csv` with the following columns:
   - Higher threshold values include more pixels
 - Close image windows to proceed with the program
 
-## Troubleshooting
+### Troubleshooting
 - If image not found: Verify file is in data folder with .jpg extension
 - If no black outline detected: Check image has clear black boundaries
+- If program crashes: Ensure virtual environment is activated and dependencies installed
+
+## Using the Area Script
+
+1. Place your JPG images in the `data/area` folder
+
+2. Run the script:
+    ```bash
+    python area.py
+    ```
+
+3. Program Flow:
+   - The script will process all images in the `data/area` folder
+   - It will calculate the area of the subject in each image
+   - It will save the results to `result/area.csv`
+
+### Output
+The script saves results to `result/area.csv` with the following columns:
+- Filename
+- Area
+
+### Troubleshooting
 - If program crashes: Ensure virtual environment is activated and dependencies installed

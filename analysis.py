@@ -64,6 +64,8 @@ def calculate_white_stripes(image, threshold_level=None):
 
         # Display results
         cv2.imshow("Original ROI", roi)
+        cv2.imshow("Black Mask", black_mask)
+        cv2.imshow("Enhanced ROI", enhanced_roi)
         cv2.imshow("Manual Thresholding", thresholded_roi)
         cv2.waitKey(0)
         cv2.destroyAllWindows()
@@ -81,7 +83,7 @@ def save_results(file_name, white_pixel_count, total_pixels):
     os.makedirs("./result", exist_ok=True)
 
     # Path to the results CSV file
-    results_path = "./result/results.csv"
+    results_path = "./result/analysis.csv"
 
     # Check if the CSV file exists, and if not, create it with the header
     file_exists = os.path.exists(results_path)
@@ -109,7 +111,7 @@ def program():
 
         print(Fore.GREEN + f"Processing {fileName}.jpg")
         # Load the image
-        image_path = f"./data/{fileName}.jpg"
+        image_path = f"./data/analysis/{fileName}.jpg"
         image = cv2.imread(image_path)
 
         if image is None:
@@ -135,4 +137,5 @@ def program():
         else:
             print(Fore.CYAN + "Retrying the same file. You can adjust the parameters.")
 
-program()
+if __name__ == "__main__":
+    program()
