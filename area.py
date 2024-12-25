@@ -15,7 +15,7 @@ def calculate_area(image):
     blurred_image = cv2.GaussianBlur(gray_image, (5, 5), 0)
 
     # Threshold the image to isolate the subject from the black background
-    _, binary_image = cv2.threshold(blurred_image, 50, 255, cv2.THRESH_BINARY)
+    _, binary_image = cv2.threshold(blurred_image, 200, 255, cv2.THRESH_BINARY_INV)
 
     # Find contours from the binary image
     contours, _ = cv2.findContours(binary_image, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
@@ -30,6 +30,7 @@ def calculate_area(image):
 
         # Count non-zero pixels in the mask to calculate the area of the subject
         total_pixels = cv2.countNonZero(mask)
+
         return total_pixels
     else:
         return 0
